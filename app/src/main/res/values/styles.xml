@@ -1,0 +1,41 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Actionbar -->
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="android:actionBarSize">55dp</item>
+        <item name="android:actionMenuTextAppearance">@style/AppTheme.MenuTextStyle</item>
+        <!--<item name="android:editTextBackground">@drawable/et_custom</item>-->
+        <item name="android:homeAsUpIndicator">@drawable/ic_menu_home_l</item>
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/White</item>
+
+
+
+    </style>
+
+    <style name="AppTheme.ActionBar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Text.Subtitle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_solid_red</item>
+        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.Text</item>
+        <item name="android:subtitleTextStyle">@style/AppTheme.ActionBar.Text.Subtitle</item>
+    </style>
+
+    <style name="AppTheme.MenuTextStyle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+
+</resources>

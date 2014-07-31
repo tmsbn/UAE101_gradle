@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/servicesIv"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/servicesTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Service"
+                android:textStyle="bold"
+                android:textColor="@color/black70a"
+                android:textSize="22sp"/>
+
+        <TextView
+                android:id="@+id/servicesDescTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/Gray"
+                android:textStyle="italic"
+                android:text="Description for service"
+                android:textSize="13sp"/>
+
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/servicesIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:contentDescription="image goes here"/>
+
+</RelativeLayout>

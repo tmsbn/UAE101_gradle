@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EasyUAE</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="networkNotAvaliable_msg">Network Service Not Avaliable</string>
+    <string name="fillAllDetails_msg">Please fill all the details</string>
+    <string name="previousEntry_txt">Showing previous entry</string>
+    <string name="onlyUAENumbers_msg">This feature only works for ETISALAT and DU Phone Numbers</string>
+
+    <string-array name="services">
+        <item>Hotlines</item>
+        <item>Send Credit</item>
+        <item>Check Credit</item>
+        <item>Pay For Parking</item>
+    </string-array>
+    <string-array name="services_description">
+        <item>Directory of hotlines numbers from UAE</item>
+        <item>Tranfer Credit to another phone</item>
+        <item>Check the avaliable balance on your phone</item>
+        <item>Pay for Dubai mParking through SMS</item>
+    </string-array>
+
+    <!-- Parking -->
+    <string name="duration_txt">1 - 24</string>
+    <string name="plateNumber_txt">eg: A00000</string>
+    <string name="zone_txt">eg:123A</string>
+    <string name="mparking_txt">mParking</string>
+    <string name="parking_txt">Parking</string>
+    <string name="pay_txt">PAY</string>
+    <string name="send_txt">Send</string>
+    <string name="platecode_txt">Code</string>
+    <string name="duration_msg">Maximum duration is 24 hours</string>
+
+    <string-array name="plate_codes">
+        <item>Code</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        <item>H</item>
+        <item>I</item>
+        <item>J</item>
+    </string-array>
+
+    <string name="test11">tms</string>
+    <string name="unableToFindNetwork_txt">Unable to find Network</string>
+    <string name="enterAmount_msg">Enter Amount to Send</string>
+    <string name="invalidPhoneNumber_msg">Invalid phone number</string>
+    <string name="amountToSendHint_msg">5 or above</string>
+    <string name="sendTo_txt">Send To</string>
+    <string name="prefix_hint">05X</string>
+    <string name="sendCreditNumber_msg">05XXXXXXXX</string>
+    <string name="title_activity_hotlines">HotlinesActivity</string>
+    <string name="searchGroup_txt">Search Group</string>
+
+</resources>

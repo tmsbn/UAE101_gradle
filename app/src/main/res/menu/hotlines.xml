@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.hololibs.easyuae.HotlinesActivity">
+
+    <item
+        android:id="@+id/searchItem"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
+        android:showAsAction="always|collapseActionView"
+        android:title="@string/searchGroup_txt" />
+</menu>
