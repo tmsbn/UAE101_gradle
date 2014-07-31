@@ -53,7 +53,7 @@ public class PayParkActivity extends Activity implements AdapterView.OnItemSelec
 
 
     /**
-     * variables for shared preferences
+     * variables for shared preferences, don't change these words on production, unless absolutely required
      */
     private static final String SP_PARKINGPREFS = "sp_parkingPrefs";
     private static final String SP_DURATION = "sp_duration";
