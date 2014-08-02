@@ -16,23 +16,23 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/groupName"
+            android:id="@+id/hotlineNumber"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black70a"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:hint="Some Group" />
+            tools:hint="0502530238" />
 
         <TextView
-            android:id="@+id/groupEmirates"
+            android:id="@+id/hotlineNumberEmirate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/Gray"
             android:textSize="12sp"
             android:textStyle="italic"
-            android:visibility="gone"
-            tools:hint="All possible Emirates" />
+            android:visibility="visible"
+            tools:hint="Dubai" />
     </LinearLayout>
 
 </RelativeLayout>

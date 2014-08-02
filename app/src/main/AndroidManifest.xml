@@ -23,17 +23,25 @@
         </activity>
         <activity
             android:name=".PayParkActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SendCreditActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".HotlinesActivity"
-            android:label="@string/title_activity_hotlines"
+            android:label="@string/chooseGroup_txt"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hololibs.easyuae.MainActivity" />
+        </activity>
+        <activity
+            android:name=".HotlineDetailsActivity"
+            android:label="@string/title_activity_hotline_details"
+            android:parentActivityName=".HotlineDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hololibs.easyuae.HotlineDetailsActivity" />
         </activity>
     </application>
 

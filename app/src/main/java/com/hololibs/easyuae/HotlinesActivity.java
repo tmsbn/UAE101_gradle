@@ -1,9 +1,12 @@
 package com.hololibs.easyuae;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -16,7 +19,7 @@ import se.emilsjolander.sprinkles.ManyQuery;
 import se.emilsjolander.sprinkles.Query;
 
 
-public class HotlinesActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
+public class HotlinesActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemClickListener {
 
     @InjectView(R.id.hotlineCategoryList)
     ListView hotlineCategoryLv;
@@ -39,6 +42,7 @@ public class HotlinesActivity extends Activity implements SearchView.OnQueryText
         mCursorAdapter = new GroupCursorAdapter(this);
         mCursorAdapter.setSearchText("");
         hotlineCategoryLv.setAdapter(mCursorAdapter);
+        hotlineCategoryLv.setOnItemClickListener(this);
         loadLibraryData();
 
     }
@@ -133,5 +137,15 @@ public class HotlinesActivity extends Activity implements SearchView.OnQueryText
     @Override
     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+        Intent intent = new Intent(this, HotlineDetailsActivity.class);
+        Group group = ((GroupCursorAdapter) hotlineCategoryLv.getAdapter()).getItem(position);
+        intent.putExtra("groupId", group.groupId);
+        startActivity(intent);
+
     }
 }

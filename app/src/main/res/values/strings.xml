@@ -4,7 +4,7 @@
     <string name="app_name">EasyUAE</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="networkNotAvaliable_msg">Network Service Not Avaliable</string>
+    <string name="networkNotAvaliable_msg">Cell Network not available now</string>
     <string name="fillAllDetails_msg">Please fill all the details</string>
     <string name="previousEntry_txt">Showing previous entry</string>
     <string name="onlyUAENumbers_msg">This feature only works for ETISALAT and DU Phone Numbers</string>
@@ -45,6 +45,10 @@
         <item>H</item>
         <item>I</item>
         <item>J</item>
+        <item>K</item>
+        <item>L</item>
+        <item>M</item>
+        <item>N</item>
     </string-array>
 
     <string name="test11">tms</string>
@@ -57,5 +61,7 @@
     <string name="sendCreditNumber_msg">05XXXXXXXX</string>
     <string name="title_activity_hotlines">HotlinesActivity</string>
     <string name="searchGroup_txt">Search Group</string>
+    <string name="chooseGroup_txt">Choose a Group</string>
+    <string name="title_activity_hotline_details">Details</string>
 
 </resources>
