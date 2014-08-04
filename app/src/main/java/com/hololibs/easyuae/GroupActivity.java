@@ -19,7 +19,7 @@ import se.emilsjolander.sprinkles.ManyQuery;
 import se.emilsjolander.sprinkles.Query;
 
 
-public class HotlinesActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemClickListener {
+public class GroupActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemClickListener {
 
     @InjectView(R.id.hotlineCategoryList)
     ListView hotlineCategoryLv;
@@ -104,7 +104,7 @@ public class HotlinesActivity extends Activity implements SearchView.OnQueryText
                             loadLibraryData();
 
                         } else {
-                            Crouton.makeText(HotlinesActivity.this, "Some error has occured", Style.ALERT).show();
+                            Crouton.makeText(GroupActivity.this, "Some error has occured", Style.ALERT).show();
 
                         }
                         return false;

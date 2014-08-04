@@ -1,6 +1,5 @@
 package com.hololibs.easyuae;
 
-import se.emilsjolander.sprinkles.Model;
 import se.emilsjolander.sprinkles.QueryResult;
 import se.emilsjolander.sprinkles.annotations.Column;
 
@@ -12,6 +11,18 @@ public class HotlineDetails implements QueryResult {
 
     @Column("name")
     String emirateName;
+
+    @Column("hotline_id")
+    int hotlineId;
+
+    @Column("active")
+    boolean active;
+
+    @Column("emirate_id")
+    String emirateId;
+
+    @Column("group_id")
+    String groupId;
 
     @Column("hotline_name")
     String hotlineName;

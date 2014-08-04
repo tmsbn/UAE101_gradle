@@ -8,7 +8,7 @@ import se.emilsjolander.sprinkles.ModelList;
 public class ServerResponse {
 
     ModelList<Emirate> emirates;
-    ModelList<Emirate> hotlines;
+    ModelList<Hotline> hotlines;
     ModelList<Group> groups;
 
 }

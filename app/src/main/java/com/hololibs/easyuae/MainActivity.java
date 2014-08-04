@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 
             case 0:
 
-                intent = new Intent(this, HotlinesActivity.class);
+                intent = new Intent(this, GroupActivity.class);
                 startActivity(intent);
 
                 break;

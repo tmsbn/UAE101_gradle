@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.Normalizer;
@@ -22,11 +23,17 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private CursorList<HotlineDetails> mHotlineDetails;
     private String searchText="";
+    private HotlineInterface delegate;
+
 
     public HotlineDetailsCursorAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
 
+    }
+
+    public void setDelegate(HotlineInterface delegate){
+        this.delegate=delegate;
     }
 
     public void setSearchText(String searchText) {
@@ -70,16 +77,30 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
             row = mInflater.inflate(R.layout.lv_rw_hotlinedetails, parent, false);
             holder.hotlineNumberTv = (TextView) row.findViewById(R.id.hotlineNumber);
             holder.hotlineNumberEmirateTv = (TextView) row.findViewById(R.id.hotlineNumberEmirate);
+            holder.addToContactIbtn = (ImageButton) row.findViewById(R.id.addToContacts);
+            holder.callHotlineIbtn = (ImageButton) row.findViewById(R.id.callHotline);
             row.setTag(holder);
 
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
-        HotlineDetails hotlineDetails = mHotlineDetails.get(position);
+        final HotlineDetails hotlineDetails = mHotlineDetails.get(position);
 
         holder.hotlineNumberTv.setText(highlight(searchText, hotlineDetails.hotlineNumber));
         holder.hotlineNumberEmirateTv.setText(highlight(searchText, hotlineDetails.emirateName));
+        holder.callHotlineIbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delegate.addToContacts(hotlineDetails.hotlineName,hotlineDetails.hotlineNumber);
+            }
+        });
+        holder.addToContactIbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delegate.callHotline(hotlineDetails.hotlineNumber);
+            }
+        });
 
 
 
@@ -91,6 +112,8 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
 
         TextView hotlineNumberTv;
         TextView hotlineNumberEmirateTv;
+        ImageButton addToContactIbtn;
+        ImageButton callHotlineIbtn;
 
 
     }
@@ -122,5 +145,13 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
             return highlighted;
         }
     }
+
+    public static interface HotlineInterface{
+
+        public void addToContacts(String name,String number);
+
+        public void callHotline(String number);
+    }
+
 
 }
