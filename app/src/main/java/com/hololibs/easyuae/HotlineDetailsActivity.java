@@ -57,27 +57,30 @@ public class HotlineDetailsActivity extends Activity implements HotlineDetailsCu
     }
 
     private void setUpViews() {
+
         ButterKnife.inject(this);
         mCursorAdapter = new HotlineDetailsCursorAdapter(this);
+        mCursorAdapter.setDelegate(this);
         hotlineDetailsLv.setAdapter(mCursorAdapter);
+
     }
 
     private void getHotlineNumbers() {
 
         String rawQuery = "SELECT hotlines.*, emirates.name FROM hotlines LEFT JOIN emirates ON hotlines.emirate_id = emirates.emirate_id WHERE hotlines.group_id=?";
-      //  CursorList<HotlineDetails> hotlineDetailsList = Query.many(HotlineDetails.class, rawQuery, groupId).get();
+        int async = Query.many(HotlineDetails.class, rawQuery, groupId).getAsync(getLoaderManager(), new ManyQuery.ResultHandler<HotlineDetails>() {
 
-        Query.many(HotlineDetails.class, rawQuery, groupId).getAsync(getLoaderManager(), onResultsLoaded);
+            @Override
+            public boolean handleResult(CursorList<HotlineDetails> result) {
 
-        /*
+                if (result != null && result.size() != 0) {
+                    mCursorAdapter.swapCursor(result);
+                }
+                return true;
 
-        if (hotlineDetailsList.size() != 0)
-            mCursorAdapter.swapCursor(hotlineDetailsList);
-        else
-            Toast.makeText(this, "No Results found:" + groupId, Toast.LENGTH_SHORT).show();
 
-            */
-
+            }
+        });
 
     }
 
@@ -105,21 +108,6 @@ public class HotlineDetailsActivity extends Activity implements HotlineDetailsCu
         startActivity(intent);
 
     }
-
-    private ManyQuery.ResultHandler<HotlineDetails> onResultsLoaded =
-            new ManyQuery.ResultHandler<HotlineDetails>() {
-
-                @Override
-                public boolean handleResult(CursorList<HotlineDetails> result) {
-
-                    if (result != null && result.size() != 0) {
-                        mCursorAdapter.swapCursor(result);
-                    }
-                    return true;
-
-
-                }
-            };
 
 
 }

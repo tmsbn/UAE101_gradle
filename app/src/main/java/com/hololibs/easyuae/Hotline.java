@@ -6,7 +6,7 @@ import se.emilsjolander.sprinkles.annotations.Key;
 import se.emilsjolander.sprinkles.annotations.Table;
 
 /**
- * DataModel for Emirates
+ * DataModel for Hotline
  */
 
 @Table("hotlines")

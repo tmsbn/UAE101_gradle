@@ -22,7 +22,7 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private CursorList<HotlineDetails> mHotlineDetails;
-    private String searchText="";
+    private String searchText = "";
     private HotlineInterface delegate;
 
 
@@ -32,8 +32,8 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
 
     }
 
-    public void setDelegate(HotlineInterface delegate){
-        this.delegate=delegate;
+    public void setDelegate(HotlineInterface delegate) {
+        this.delegate = delegate;
     }
 
     public void setSearchText(String searchText) {
@@ -90,18 +90,20 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
         holder.hotlineNumberTv.setText(highlight(searchText, hotlineDetails.hotlineNumber));
         holder.hotlineNumberEmirateTv.setText(highlight(searchText, hotlineDetails.emirateName));
         holder.callHotlineIbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                delegate.addToContacts(hotlineDetails.hotlineName,hotlineDetails.hotlineNumber);
-            }
-        });
-        holder.addToContactIbtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 delegate.callHotline(hotlineDetails.hotlineNumber);
             }
         });
+        holder.addToContactIbtn.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                delegate.addToContacts(hotlineDetails.hotlineName, hotlineDetails.hotlineNumber);
+
+            }
+        });
 
 
         return row;
@@ -117,7 +119,6 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
 
 
     }
-
 
 
     public CharSequence highlight(String search, String originalText) {
@@ -146,9 +147,9 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
         }
     }
 
-    public static interface HotlineInterface{
+    public static interface HotlineInterface {
 
-        public void addToContacts(String name,String number);
+        public void addToContacts(String name, String number);
 
         public void callHotline(String number);
     }

@@ -49,7 +49,8 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
 
     private void loadLibraryData() {
 
-        Query.all(Group.class).getAsync(getLoaderManager(), onResultsLoaded, Group.class);
+        int async = Query.all(Group.class).getAsync(getLoaderManager(), onResultsLoaded, Group.class);
+
 
     }
 

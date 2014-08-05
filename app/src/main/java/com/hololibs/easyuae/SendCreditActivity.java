@@ -222,7 +222,7 @@ public class SendCreditActivity extends Activity implements TextWatcher {
         editor.putString(SP_CONTACTNO, phoneNumberToSendEt.getText().toString());
         editor.putString(SP_CONTACTNAME, contactNameTv.getText().toString());
 
-        // Commit the edits!
+
         editor.apply();
     }
 
