@@ -30,7 +30,9 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     @InjectView(R.id.status)
     TextView statusTv;
 
-    GroupCursorAdapter mCursorAdapter;
+    // GroupCursorAdapter mCursorAdapter;
+
+    GroupResultCursorAdapter mCursorAdapter;
 
     SearchView mSearchView;
     MenuItem mSearchItem;
@@ -45,7 +47,9 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
 
     private void setUpViews() {
         ButterKnife.inject(this);
-        mCursorAdapter = new GroupCursorAdapter(this);
+        // mCursorAdapter = new GroupCursorAdapter(this);
+        mCursorAdapter = new GroupResultCursorAdapter(this);
+
         hotlineCategoryLv.setAdapter(mCursorAdapter);
         hotlineCategoryLv.setOnItemClickListener(this);
         loadHotlinesData();
@@ -55,10 +59,8 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     private void loadHotlinesData() {
 
         mCursorAdapter.setSearchText("");
-        Query.all(Group.class).getAsync(getLoaderManager(), onResultsLoaded, Group.class);
-        statusTv.setText(getString(R.string.loading_txt));
-        statusTv.setVisibility(View.VISIBLE);
-
+        String rawQuery = "SELECT g.group_id, g.group_name, GROUP_CONCAT(e.name , ', ') AS 'emirates' FROM ( groups g LEFT JOIN hotlines h ON h.group_id = g.group_id LEFT JOIN emirates e ON e.emirate_id = h.emirate_id) WHERE h.emirate_id IS NOT NULL GROUP BY g.group_id";
+        Query.many(GroupResult.class, rawQuery).getAsync(getLoaderManager(), OnGroupResultsLoaded);
 
     }
 
@@ -88,6 +90,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         mSearchView.setOnQueryTextListener(this);
         mSearchItem.setOnActionExpandListener(this);
 
+
         return true;
     }
 
@@ -98,11 +101,12 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         return super.onOptionsItemSelected(item);
     }
 
-    private ManyQuery.ResultHandler<Group> onResultsLoaded =
-            new ManyQuery.ResultHandler<Group>() {
+    private ManyQuery.ResultHandler<GroupResult> OnGroupResultsLoaded =
+            new ManyQuery.ResultHandler<GroupResult>() {
 
                 @Override
-                public boolean handleResult(CursorList<Group> result) {
+                public boolean handleResult(CursorList<GroupResult> result) {
+
 
                     if (result != null) {
                         mCursorAdapter.swapCursor(result);
@@ -117,7 +121,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
                             loadHotlinesData();
 
                         } else {
-                            Crouton.makeText(GroupActivity.this, "Some error has occured", Style.ALERT).show();
+                            Crouton.makeText(GroupActivity.this, "Some error has occurred", Style.ALERT).show();
 
                         }
                         return false;
@@ -135,8 +139,9 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     @Override
     public boolean onQueryTextChange(String searchText) {
 
-        ((GroupCursorAdapter) hotlineCategoryLv.getAdapter()).setSearchText(searchText);
-        Query.many(Group.class, "SELECT * FROM groups WHERE group_name LIKE ? ", "%" + searchText + "%").getAsync(getLoaderManager(), onResultsLoaded, Group.class);
+        ((GroupResultCursorAdapter) hotlineCategoryLv.getAdapter()).setSearchText(searchText);
+        String rawQuery = "SELECT g.group_id, g.group_name, GROUP_CONCAT(e.name , ', ') AS emirates FROM ( groups g LEFT JOIN hotlines h ON h.group_id = g.group_id LEFT JOIN emirates e ON e.emirate_id = h.emirate_id) WHERE g.group_name LIKE ? AND h.emirate_id IS NOT NULL GROUP BY g.group_id";
+        Query.many(GroupResult.class, rawQuery, "%" + searchText + "%").getAsync(getLoaderManager(), OnGroupResultsLoaded);
 
 
         return false;
@@ -157,9 +162,9 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
         Intent intent = new Intent(this, HotlineDetailsActivity.class);
-        Group group = ((GroupCursorAdapter) hotlineCategoryLv.getAdapter()).getItem(position);
-        intent.putExtra("groupId", group.groupId);
-        intent.putExtra("groupName", group.groupName);
+        GroupResult groupResult = ((GroupResultCursorAdapter) hotlineCategoryLv.getAdapter()).getItem(position);
+        intent.putExtra("groupId", groupResult.groupId);
+        intent.putExtra("groupName", groupResult.groupName);
         startActivity(intent);
 
     }

@@ -16,14 +16,14 @@ import java.text.Normalizer;
 import se.emilsjolander.sprinkles.CursorList;
 
 
-public class GroupCursorAdapter extends BaseAdapter {
+public class GroupResultCursorAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private CursorList<Group> mGroups;
-    private String searchText="";
+    private CursorList<GroupResult> mGroups;
+    private String searchText = "";
 
-    public GroupCursorAdapter(Context context) {
+    public GroupResultCursorAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
 
@@ -33,7 +33,7 @@ public class GroupCursorAdapter extends BaseAdapter {
         this.searchText = searchText;
     }
 
-    public void swapCursor(CursorList<Group> groups) {
+    public void swapCursor(CursorList<GroupResult> groups) {
         if (mGroups != null) {
             mGroups.close();
         }
@@ -49,7 +49,7 @@ public class GroupCursorAdapter extends BaseAdapter {
 
 
     @Override
-    public Group getItem(int position) {
+    public GroupResult getItem(int position) {
         return mGroups.get(position);
     }
 
@@ -76,11 +76,11 @@ public class GroupCursorAdapter extends BaseAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        Group group = mGroups.get(position);
+        GroupResult groupResult = mGroups.get(position);
 
 
-
-        holder.groupNameTv.setText(highlight(searchText, group.groupName));
+        holder.groupNameTv.setText(highlight(searchText, groupResult.groupName));
+        holder.groupEmirateTv.setText("For " + groupResult.emirates);
 
 
         return row;
@@ -96,11 +96,11 @@ public class GroupCursorAdapter extends BaseAdapter {
     }
 
 
-
     public CharSequence highlight(String search, String originalText) {
         // ignore case and accents
-        // the same thing should have been done for the search text
         String normalizedText = Normalizer.normalize(originalText, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "").toLowerCase();
+        search = Normalizer.normalize(search, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "").toLowerCase();
+
 
         int start = normalizedText.indexOf(search);
         if (search.equals("") || start < 0) {

@@ -35,7 +35,7 @@ public class HotlineDetailsActivity extends Activity implements HotlineDetailsCu
         setUpViews();
 
         groupId = getIntent().getIntExtra("groupId", 0);
-        groupName=getIntent().getStringExtra("groupName");
+        groupName = getIntent().getStringExtra("groupName");
 
         if (groupId == 0)
             finish();
@@ -78,7 +78,7 @@ public class HotlineDetailsActivity extends Activity implements HotlineDetailsCu
     private void getHotlineNumbers() {
 
         String rawQuery = "SELECT hotlines.*, emirates.name FROM hotlines LEFT JOIN emirates ON hotlines.emirate_id = emirates.emirate_id WHERE hotlines.group_id=?";
-        int async = Query.many(HotlineDetails.class, rawQuery, groupId).getAsync(getLoaderManager(), new ManyQuery.ResultHandler<HotlineDetails>() {
+        Query.many(HotlineDetails.class, rawQuery, groupId).getAsync(getLoaderManager(), new ManyQuery.ResultHandler<HotlineDetails>() {
 
             @Override
             public boolean handleResult(CursorList<HotlineDetails> result) {
