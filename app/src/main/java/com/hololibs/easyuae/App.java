@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import se.emilsjolander.sprinkles.Migration;
 import se.emilsjolander.sprinkles.Sprinkles;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 
 public class App extends Application {
@@ -13,6 +14,8 @@ public class App extends Application {
         super.onCreate();
 
         Sprinkles sprinkles = Sprinkles.init(getApplicationContext());
+
+        CalligraphyConfig.initDefault("fonts/Roboto-Regular.ttf", R.attr.fontPath);
 
         sprinkles.addMigration(new Migration() {
             @Override

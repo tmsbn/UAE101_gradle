@@ -4,9 +4,20 @@
     android:layout_height="match_parent"
     tools:context="com.hololibs.easyuae.GroupActivity">
 
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        tools:hint="STATUS" />
+
     <ListView
         android:id="@+id/hotlineCategoryList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

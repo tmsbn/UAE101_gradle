@@ -1,6 +1,7 @@
 package com.hololibs.easyuae;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import butterknife.InjectView;
 import se.emilsjolander.sprinkles.CursorList;
 import se.emilsjolander.sprinkles.ManyQuery;
 import se.emilsjolander.sprinkles.Query;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class HotlineDetailsActivity extends Activity implements HotlineDetailsCursorAdapter.HotlineInterface {
@@ -22,17 +24,25 @@ public class HotlineDetailsActivity extends Activity implements HotlineDetailsCu
     ListView hotlineDetailsLv;
 
     HotlineDetailsCursorAdapter mCursorAdapter;
+
     int groupId;
+    String groupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotline_details);
         setUpViews();
+
         groupId = getIntent().getIntExtra("groupId", 0);
+        groupName=getIntent().getStringExtra("groupName");
+
         if (groupId == 0)
             finish();
-        getHotlineNumbers();
+        else {
+            getActionBar().setTitle(groupName);
+            getHotlineNumbers();
+        }
 
     }
 
@@ -107,6 +117,11 @@ public class HotlineDetailsActivity extends Activity implements HotlineDetailsCu
         intent.setData(Uri.parse(uri));
         startActivity(intent);
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
 

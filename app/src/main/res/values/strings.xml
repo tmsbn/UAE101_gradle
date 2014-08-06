@@ -63,5 +63,7 @@
     <string name="searchGroup_txt">Search Group</string>
     <string name="chooseGroup_txt">Choose a Group</string>
     <string name="title_activity_hotline_details">Details</string>
+    <string name="loading_txt">Loading...</string>
+    <string name="noResults_txt">No Results</string>
 
 </resources>

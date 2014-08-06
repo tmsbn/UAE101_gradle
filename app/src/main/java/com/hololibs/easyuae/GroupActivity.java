@@ -1,6 +1,7 @@
 package com.hololibs.easyuae;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -17,12 +19,16 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 import se.emilsjolander.sprinkles.CursorList;
 import se.emilsjolander.sprinkles.ManyQuery;
 import se.emilsjolander.sprinkles.Query;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class GroupActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemClickListener {
 
     @InjectView(R.id.hotlineCategoryList)
     ListView hotlineCategoryLv;
+
+    @InjectView(R.id.status)
+    TextView statusTv;
 
     GroupCursorAdapter mCursorAdapter;
 
@@ -40,19 +46,22 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     private void setUpViews() {
         ButterKnife.inject(this);
         mCursorAdapter = new GroupCursorAdapter(this);
-        mCursorAdapter.setSearchText("");
         hotlineCategoryLv.setAdapter(mCursorAdapter);
         hotlineCategoryLv.setOnItemClickListener(this);
-        loadLibraryData();
+        loadHotlinesData();
 
     }
 
-    private void loadLibraryData() {
+    private void loadHotlinesData() {
 
-        int async = Query.all(Group.class).getAsync(getLoaderManager(), onResultsLoaded, Group.class);
+        mCursorAdapter.setSearchText("");
+        Query.all(Group.class).getAsync(getLoaderManager(), onResultsLoaded, Group.class);
+        statusTv.setText(getString(R.string.loading_txt));
+        statusTv.setVisibility(View.VISIBLE);
 
 
     }
+
 
     private boolean parseAndSaveDataFromJson() {
 
@@ -84,9 +93,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -97,12 +104,17 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
                 @Override
                 public boolean handleResult(CursorList<Group> result) {
 
-                    if (result != null && result.size() != 0) {
+                    if (result != null) {
                         mCursorAdapter.swapCursor(result);
+                        if (result.size() == 0) {
+                            statusTv.setText(getString(R.string.noResults_txt));
+                            statusTv.setVisibility(View.VISIBLE);
+                        } else
+                            statusTv.setVisibility(View.GONE);
                         return true;
                     } else {
                         if (parseAndSaveDataFromJson()) {
-                            loadLibraryData();
+                            loadHotlinesData();
 
                         } else {
                             Crouton.makeText(GroupActivity.this, "Some error has occured", Style.ALERT).show();
@@ -137,6 +149,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+        loadHotlinesData();
         return true;
     }
 
@@ -146,7 +159,15 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         Intent intent = new Intent(this, HotlineDetailsActivity.class);
         Group group = ((GroupCursorAdapter) hotlineCategoryLv.getAdapter()).getItem(position);
         intent.putExtra("groupId", group.groupId);
+        intent.putExtra("groupName", group.groupName);
         startActivity(intent);
 
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
+
+
 }
