@@ -13,7 +13,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Sprinkles sprinkles = Sprinkles.init(getApplicationContext());
+        Sprinkles sprinkles = Sprinkles.init(getApplicationContext(), Globals.DATABASE_NAME, 0);
 
         CalligraphyConfig.initDefault("fonts/Roboto-Regular.ttf", R.attr.fontPath);
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/White"
-    android:padding="10dp">
+    android:padding="16dp">
 
 
     <LinearLayout
@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/Gray"
             android:textSize="12sp"
-            android:textStyle="italic"
             android:visibility="visible"
             tools:hint="Dubai" />
     </LinearLayout>
@@ -38,21 +37,23 @@
 
     <ImageButton
         android:id="@+id/callHotline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@drawable/bg_lineleft"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_phone"
         tools:hint="Dubai" />
 
     <ImageButton
         android:id="@+id/addToContacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/callHotline"
         android:background="@drawable/bg_lineleft"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_add_contact"
         tools:hint="Dubai" />
 

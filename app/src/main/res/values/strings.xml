@@ -65,5 +65,7 @@
     <string name="title_activity_hotline_details">Details</string>
     <string name="loading_txt">Loading...</string>
     <string name="noResults_txt">No Results</string>
+    <string name="loadingData_txt">Loading data..</string>
+    <string name="CouldNotLoadData_txt">Could not load hotlines data</string>
 
 </resources>

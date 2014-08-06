@@ -18,6 +18,7 @@ public class Globals {
 
     private static final String CONFIG_PATH = "configuration.json";
     private static final String DATA_PATH = "data.json";
+    public static final String DATABASE_NAME="easyuaedata";
 
 
     private static ServerResponse serverResponse;
@@ -34,7 +35,7 @@ public class Globals {
         public int getCode() {
             return code;
         }
-        }
+    }
 
     public static final int IMAGES_HOME[] = {R.drawable.ic_hotline, R.drawable.ic_credit_transfer, R.drawable.ic_credit_transfer, R.drawable.ic_parking_meter};
 
@@ -43,7 +44,7 @@ public class Globals {
         if (serverResponse == null) {
 
             try {
-                Gson gson =new GsonBuilder()
+                Gson gson = new GsonBuilder()
                         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                         .create();
                 InputStream input = context.getAssets().open(DATA_PATH);
@@ -52,7 +53,7 @@ public class Globals {
                 input.read(buffer);
                 input.close();
                 String text = new String(buffer);
-                text = text.replaceAll("\\s+", "");
+                //text = text.replaceAll("\\s+", " ");
                 serverResponse = gson.fromJson(text, ServerResponse.class);
                 return serverResponse;
 

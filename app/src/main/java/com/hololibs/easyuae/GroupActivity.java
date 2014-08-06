@@ -2,6 +2,7 @@ package com.hololibs.easyuae;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -47,12 +50,23 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
 
     private void setUpViews() {
         ButterKnife.inject(this);
-        // mCursorAdapter = new GroupCursorAdapter(this);
         mCursorAdapter = new GroupResultCursorAdapter(this);
 
         hotlineCategoryLv.setAdapter(mCursorAdapter);
         hotlineCategoryLv.setOnItemClickListener(this);
-        loadHotlinesData();
+
+        if (doesDatabaseExist(this, Globals.DATABASE_NAME))
+            loadHotlinesData();
+        else {
+            //Crouton.makeText(GroupActivity.this, getString(R.string.loadingData_txt), Style.CONFIRM).show();
+            if (parseAndSaveDataFromJson())
+                loadHotlinesData();
+            else {
+                statusTv.setText(getString(R.string.CouldNotLoadData_txt));
+                statusTv.setVisibility(View.VISIBLE);
+            }
+
+        }
 
     }
 
@@ -62,6 +76,11 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         String rawQuery = "SELECT g.group_id, g.group_name, GROUP_CONCAT(e.name , ', ') AS 'emirates' FROM ( groups g LEFT JOIN hotlines h ON h.group_id = g.group_id LEFT JOIN emirates e ON e.emirate_id = h.emirate_id) WHERE h.emirate_id IS NOT NULL GROUP BY g.group_id";
         Query.many(GroupResult.class, rawQuery).getAsync(getLoaderManager(), OnGroupResultsLoaded);
 
+    }
+
+    private static boolean doesDatabaseExist(ContextWrapper context, String dbName) {
+        File dbFile = context.getDatabasePath(dbName);
+        return dbFile.exists();
     }
 
 
@@ -116,17 +135,8 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
                         } else
                             statusTv.setVisibility(View.GONE);
                         return true;
-                    } else {
-                        if (parseAndSaveDataFromJson()) {
-                            loadHotlinesData();
-
-                        } else {
-                            Crouton.makeText(GroupActivity.this, "Some error has occurred", Style.ALERT).show();
-
-                        }
-                        return false;
                     }
-
+                    return false;
 
                 }
             };

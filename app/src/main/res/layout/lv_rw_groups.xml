@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@color/White">
+    android:background="@color/White"
+    android:paddingBottom="10dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp">
 
 
     <LinearLayout
@@ -19,6 +22,7 @@
             android:id="@+id/groupName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:textColor="@color/black70a"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -29,7 +33,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/Gray"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="italic"
             android:visibility="visible"
             tools:hint="All possible Emirates" />
