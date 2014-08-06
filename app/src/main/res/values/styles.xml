@@ -16,6 +16,7 @@
     <style name="AppTheme.ActionBar.Text" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/White</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="AppTheme.ActionBar.Text.Subtitle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
