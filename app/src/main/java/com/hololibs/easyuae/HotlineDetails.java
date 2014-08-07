@@ -19,7 +19,7 @@ public class HotlineDetails implements QueryResult {
     boolean active;
 
     @Column("emirate_id")
-    String emirateId;
+    int emirateId;
 
     @Column("group_id")
     String groupId;

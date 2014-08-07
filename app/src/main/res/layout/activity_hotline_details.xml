@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
 
-    <ListView
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+
         android:id="@+id/hotlineDetailsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

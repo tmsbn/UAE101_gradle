@@ -15,13 +15,14 @@ import butterknife.InjectView;
 import se.emilsjolander.sprinkles.CursorList;
 import se.emilsjolander.sprinkles.ManyQuery;
 import se.emilsjolander.sprinkles.Query;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class HotlineDetailsActivity extends Activity implements HotlineDetailsCursorAdapter.HotlineInterface {
 
     @InjectView(R.id.hotlineDetailsList)
-    ListView hotlineDetailsLv;
+    StickyListHeadersListView hotlineDetailsLv;
 
     HotlineDetailsCursorAdapter mCursorAdapter;
 
@@ -77,7 +78,7 @@ public class HotlineDetailsActivity extends Activity implements HotlineDetailsCu
 
     private void getHotlineNumbers() {
 
-        String rawQuery = "SELECT hotlines.*, emirates.name FROM hotlines LEFT JOIN emirates ON hotlines.emirate_id = emirates.emirate_id WHERE hotlines.group_id=?";
+        String rawQuery = "SELECT hotlines.*, emirates.name ,emirates.emirate_id FROM hotlines LEFT JOIN emirates ON hotlines.emirate_id = emirates.emirate_id WHERE hotlines.group_id=?";
         Query.many(HotlineDetails.class, rawQuery, groupId).getAsync(getLoaderManager(), new ManyQuery.ResultHandler<HotlineDetails>() {
 
             @Override

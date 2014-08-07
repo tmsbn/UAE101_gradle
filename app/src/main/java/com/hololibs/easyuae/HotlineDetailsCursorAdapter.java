@@ -15,9 +15,10 @@ import android.widget.TextView;
 import java.text.Normalizer;
 
 import se.emilsjolander.sprinkles.CursorList;
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 
-public class HotlineDetailsCursorAdapter extends BaseAdapter {
+public class HotlineDetailsCursorAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -107,6 +108,22 @@ public class HotlineDetailsCursorAdapter extends BaseAdapter {
 
 
         return row;
+    }
+
+    @Override
+    public View getHeaderView(int i, View view, ViewGroup viewGroup) {
+
+        View headerView = mInflater.inflate(R.layout.lv_hr_hotline_details, viewGroup, false);
+        TextView emirateHeader = (TextView) headerView.findViewById(R.id.emirateHeader);
+        emirateHeader.setText(mHotlineDetails.get(i).emirateName);
+
+        return headerView;
+    }
+
+    @Override
+    public long getHeaderId(int i) {
+
+        return mHotlineDetails.get(i).emirateId;
     }
 
 

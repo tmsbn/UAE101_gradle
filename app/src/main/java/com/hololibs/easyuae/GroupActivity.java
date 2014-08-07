@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -17,8 +18,6 @@ import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 import se.emilsjolander.sprinkles.CursorList;
 import se.emilsjolander.sprinkles.ManyQuery;
 import se.emilsjolander.sprinkles.Query;
@@ -27,13 +26,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class GroupActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemClickListener {
 
-    @InjectView(R.id.hotlineCategoryList)
-    ListView hotlineCategoryLv;
+    @InjectView(R.id.hotlineGroupList)
+    ListView hotlineGroupLv;
 
     @InjectView(R.id.status)
     TextView statusTv;
-
-    // GroupCursorAdapter mCursorAdapter;
 
     GroupResultCursorAdapter mCursorAdapter;
 
@@ -44,7 +41,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotlines);
+        setContentView(R.layout.activity_groups);
         setUpViews();
     }
 
@@ -52,8 +49,10 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         ButterKnife.inject(this);
         mCursorAdapter = new GroupResultCursorAdapter(this);
 
-        hotlineCategoryLv.setAdapter(mCursorAdapter);
-        hotlineCategoryLv.setOnItemClickListener(this);
+
+        hotlineGroupLv.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        hotlineGroupLv.setAdapter(mCursorAdapter);
+        hotlineGroupLv.setOnItemClickListener(this);
 
         if (doesDatabaseExist(this, Globals.DATABASE_NAME))
             loadHotlinesData();
@@ -149,7 +148,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     @Override
     public boolean onQueryTextChange(String searchText) {
 
-        ((GroupResultCursorAdapter) hotlineCategoryLv.getAdapter()).setSearchText(searchText);
+        ((GroupResultCursorAdapter) hotlineGroupLv.getAdapter()).setSearchText(searchText);
         String rawQuery = "SELECT g.group_id, g.group_name, GROUP_CONCAT(e.name , ', ') AS emirates FROM ( groups g LEFT JOIN hotlines h ON h.group_id = g.group_id LEFT JOIN emirates e ON e.emirate_id = h.emirate_id) WHERE g.group_name LIKE ? AND h.emirate_id IS NOT NULL GROUP BY g.group_id";
         Query.many(GroupResult.class, rawQuery, "%" + searchText + "%").getAsync(getLoaderManager(), OnGroupResultsLoaded);
 
@@ -172,7 +171,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
         Intent intent = new Intent(this, HotlineDetailsActivity.class);
-        GroupResult groupResult = ((GroupResultCursorAdapter) hotlineCategoryLv.getAdapter()).getItem(position);
+        GroupResult groupResult = ((GroupResultCursorAdapter) hotlineGroupLv.getAdapter()).getItem(position);
         intent.putExtra("groupId", groupResult.groupId);
         intent.putExtra("groupName", groupResult.groupName);
         startActivity(intent);

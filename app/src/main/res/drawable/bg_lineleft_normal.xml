@@ -13,8 +13,8 @@
 
             <padding
                 android:bottom="6dp"
-                android:left="6dp"
-                android:right="6dp"
+                android:left="8dp"
+                android:right="8dp"
                 android:top="6dp" />
 
             <solid android:color="@android:color/transparent" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">EasyUAE</string>
+    <string name="app_name">Easy UAE</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="networkNotAvaliable_msg">Cell Network not available now</string>

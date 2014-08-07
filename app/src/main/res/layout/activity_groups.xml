@@ -16,8 +16,9 @@
         tools:hint="STATUS" />
 
     <ListView
-        android:id="@+id/hotlineCategoryList"
+        android:id="@+id/hotlineGroupList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:listSelector="@drawable/default_selector" />
 
 </RelativeLayout>
