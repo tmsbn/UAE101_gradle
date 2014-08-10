@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop">
             <intent-filter>
@@ -22,25 +22,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PayParkActivity"
+            android:name=".activities.PayParkActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".SendCreditActivity"
+            android:name=".activities.SendCreditActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".GroupActivity"
+            android:name=".activities.GroupActivity"
             android:label="@string/chooseGroup_txt"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
 
         </activity>
         <activity
-            android:name=".HotlineDetailsActivity"
+            android:name=".activities.HotlineDetailsActivity"
             android:label="@string/title_activity_hotline_details"
             android:launchMode="singleTop"
-            android:parentActivityName=".HotlineDetailsActivity">
+            android:parentActivityName=".activities.HotlineDetailsActivity">
 
         </activity>
     </application>

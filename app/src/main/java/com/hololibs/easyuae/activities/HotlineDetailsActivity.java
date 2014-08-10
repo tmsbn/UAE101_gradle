@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
+
+import com.hololibs.easyuae.R;
+import com.hololibs.easyuae.adapters.HotlineDetailsCursorAdapter;
+import com.hololibs.easyuae.models.HotlineDetails;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

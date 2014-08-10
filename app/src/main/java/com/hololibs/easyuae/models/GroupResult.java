@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.models;
 
 import se.emilsjolander.sprinkles.QueryResult;
 import se.emilsjolander.sprinkles.annotations.Column;
@@ -8,14 +8,14 @@ public class GroupResult implements QueryResult {
 
 
     @Column("group_id")
-    int groupId;
+    public int groupId;
 
     @Column("group_name")
-    String groupName;
+    public String groupName;
 
     @Column("emirates")
-    String emirates;
+    public String emirates;
 
     @Column("marked")
-    boolean marked;
+    public boolean marked;
 }

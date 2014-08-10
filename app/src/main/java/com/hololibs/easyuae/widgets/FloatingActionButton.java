@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.widgets;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;

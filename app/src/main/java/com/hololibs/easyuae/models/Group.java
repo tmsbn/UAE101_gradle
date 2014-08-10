@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.models;
 
 import se.emilsjolander.sprinkles.Model;
 import se.emilsjolander.sprinkles.annotations.Column;
@@ -14,14 +14,14 @@ public class Group extends Model {
 
     @Key
     @Column("group_id")
-    int groupId;
+    public int groupId;
 
     @Column("active")
-    boolean active;
+    public boolean active;
 
     @Column("group_name")
-    String groupName;
+    public String groupName;
 
     @Column("marked")
-    boolean marked=false;
+    public boolean marked = false;
 }

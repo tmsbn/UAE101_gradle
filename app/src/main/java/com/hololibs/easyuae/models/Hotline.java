@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.models;
 
 import se.emilsjolander.sprinkles.Model;
 import se.emilsjolander.sprinkles.annotations.Column;
@@ -10,25 +10,25 @@ import se.emilsjolander.sprinkles.annotations.Table;
  */
 
 @Table("hotlines")
-public class Hotline extends Model{
+public class Hotline extends Model {
 
     @Key
     @Column("hotline_id")
-    int hotlineId;
+    public int hotlineId;
 
     @Column("active")
-    boolean active;
+    public boolean active;
 
     @Column("emirate_id")
-    String emirateId;
+    public String emirateId;
 
     @Column("group_id")
-    String groupId;
+    public String groupId;
 
     @Column("hotline_name")
-    String hotlineName;
+    public String hotlineName;
 
     @Column("hotline_number")
-    String hotlineNumber;
+    public String hotlineNumber;
 
 }

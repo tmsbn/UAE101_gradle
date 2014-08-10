@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.models;
 
 import se.emilsjolander.sprinkles.Model;
 import se.emilsjolander.sprinkles.annotations.Column;
@@ -10,15 +10,15 @@ import se.emilsjolander.sprinkles.annotations.Table;
  */
 
 @Table("emirates")
-public class Emirate extends Model{
+public class Emirate extends Model {
 
     @Key
     @Column("emirate_id")
-    int emirateId;
+    public int emirateId;
 
     @Column("name")
-    String name;
+    public String name;
 
     @Column("shortform")
-    String shortform;
+    public String shortform;
 }

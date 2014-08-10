@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.hololibs.easyuae.R;
+import com.hololibs.easyuae.models.GroupResult;
 
 import java.text.Normalizer;
 
@@ -89,6 +92,7 @@ public class GroupResultCursorAdapter extends BaseAdapter {
         final GroupResult groupResult = mGroups.get(position);
 
         holder.markGroupIbtn.setFocusable(false);
+        holder.markGroupIbtn.setFocusableInTouchMode(false);
 
         if (!isMarkedShown) {
             holder.markGroupIbtn.setVisibility(View.VISIBLE);

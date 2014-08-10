@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,15 +9,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
+
+import com.hololibs.easyuae.Configuration;
+import com.hololibs.easyuae.Globals;
+import com.hololibs.easyuae.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

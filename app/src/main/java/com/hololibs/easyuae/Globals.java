@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hololibs.easyuae.models.ServerResponse;
 
 import java.io.InputStream;
 

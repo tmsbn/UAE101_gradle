@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,12 +8,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.hololibs.easyuae.Globals;
+import com.hololibs.easyuae.R;
+import com.hololibs.easyuae.adapters.GroupResultCursorAdapter;
+import com.hololibs.easyuae.models.Group;
+import com.hololibs.easyuae.models.GroupResult;
+import com.hololibs.easyuae.models.ServerResponse;
 
 import java.io.File;
 
@@ -58,7 +64,6 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         mCursorAdapter = new GroupResultCursorAdapter(this);
 
 
-        hotlineGroupLv.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         hotlineGroupLv.setAdapter(mCursorAdapter);
         hotlineGroupLv.setOnItemClickListener(this);
 

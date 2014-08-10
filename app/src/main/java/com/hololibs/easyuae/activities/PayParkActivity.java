@@ -1,4 +1,4 @@
-package com.hololibs.easyuae;
+package com.hololibs.easyuae.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +20,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.hololibs.easyuae.Configuration;
+import com.hololibs.easyuae.widgets.FloatingActionButton;
+import com.hololibs.easyuae.Globals;
+import com.hololibs.easyuae.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
