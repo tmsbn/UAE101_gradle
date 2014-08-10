@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -25,6 +27,7 @@ public class MainActivity extends Activity {
 
     @InjectView(R.id.dashList)
     ListView servicesLv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class MainActivity extends Activity {
         String[] from = {"text", "image", "desc"};
         return new SimpleAdapter(this, data, R.layout.lv_rw_services, from, to);
     }
+
+
 
     @OnItemClick(R.id.dashList)
     public void goToService(int position) {
@@ -129,6 +134,7 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(new CalligraphyContextWrapper(newBase));

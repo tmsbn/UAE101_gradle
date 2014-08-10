@@ -15,4 +15,7 @@ public class GroupResult implements QueryResult {
 
     @Column("emirates")
     String emirates;
+
+    @Column("marked")
+    boolean marked;
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.Normalizer;
@@ -22,12 +23,20 @@ public class GroupResultCursorAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private CursorList<GroupResult> mGroups;
     private String searchText = "";
+    private GroupsInterface delegate;
+    private boolean isMarkedShown;
 
     public GroupResultCursorAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        delegate = (GroupsInterface) context;
 
     }
+
+    public void setIsMarkedShown(boolean isMarkedShown) {
+        this.isMarkedShown = isMarkedShown;
+    }
+
 
     public void setSearchText(String searchText) {
         this.searchText = searchText;
@@ -70,13 +79,33 @@ public class GroupResultCursorAdapter extends BaseAdapter {
             row = mInflater.inflate(R.layout.lv_rw_groups, parent, false);
             holder.groupNameTv = (TextView) row.findViewById(R.id.groupName);
             holder.groupEmirateTv = (TextView) row.findViewById(R.id.groupEmirates);
+            holder.markGroupIbtn = (ImageButton) row.findViewById(R.id.markGroup);
             row.setTag(holder);
 
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
-        GroupResult groupResult = mGroups.get(position);
+        final GroupResult groupResult = mGroups.get(position);
+
+        if (!isMarkedShown) {
+            holder.markGroupIbtn.setVisibility(View.VISIBLE);
+            if (groupResult.marked)
+                holder.markGroupIbtn.setActivated(true);
+            else
+                holder.markGroupIbtn.setActivated(false);
+
+
+            holder.markGroupIbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    delegate.groupWasMarked(groupResult);
+
+                }
+            });
+        } else
+            holder.markGroupIbtn.setVisibility(View.GONE);
 
 
         holder.groupNameTv.setText(highlight(searchText, groupResult.groupName));
@@ -91,6 +120,7 @@ public class GroupResultCursorAdapter extends BaseAdapter {
 
         TextView groupNameTv;
         TextView groupEmirateTv;
+        ImageButton markGroupIbtn;
 
 
     }
@@ -121,6 +151,12 @@ public class GroupResultCursorAdapter extends BaseAdapter {
 
             return highlighted;
         }
+    }
+
+    public static interface GroupsInterface {
+
+        public void groupWasMarked(GroupResult groupResult);
+
     }
 
 }

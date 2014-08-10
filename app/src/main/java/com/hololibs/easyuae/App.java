@@ -39,7 +39,8 @@ public class App extends Application {
                 sqLiteDatabase.execSQL("CREATE TABLE groups (" +
                         "group_id INTEGER PRIMARY KEY," +
                         "active INTEGER," +
-                        "group_name TEXT" +
+                        "group_name TEXT," +
+                        "marked INTEGER" +
                         ")");
 
 

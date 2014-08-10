@@ -10,7 +10,7 @@ import se.emilsjolander.sprinkles.annotations.Table;
  */
 
 @Table("groups")
-public class Group extends Model{
+public class Group extends Model {
 
     @Key
     @Column("group_id")
@@ -21,4 +21,7 @@ public class Group extends Model{
 
     @Column("group_name")
     String groupName;
+
+    @Column("marked")
+    boolean marked=false;
 }

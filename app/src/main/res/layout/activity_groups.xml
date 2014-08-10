@@ -50,6 +50,7 @@
         android:layout_below="@+id/groupsOptions"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
+        android:textColor="@color/DarkGray"
         android:textSize="18sp"
         tools:hint="STATUS" />
 

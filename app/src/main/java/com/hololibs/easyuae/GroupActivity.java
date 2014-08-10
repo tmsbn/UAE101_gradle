@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ import se.emilsjolander.sprinkles.Query;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class GroupActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemClickListener {
+public class GroupActivity extends Activity implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemClickListener, GroupResultCursorAdapter.GroupsInterface, RadioGroup.OnCheckedChangeListener {
 
     @InjectView(R.id.hotlineGroupList)
     ListView hotlineGroupLv;
@@ -32,10 +33,17 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     @InjectView(R.id.status)
     TextView statusTv;
 
+    @InjectView(R.id.groupsOptions)
+    RadioGroup mRadioGroup;
+
     GroupResultCursorAdapter mCursorAdapter;
 
     SearchView mSearchView;
     MenuItem mSearchItem;
+
+    String searchText = "";
+
+    boolean showingMarked = false;
 
 
     @Override
@@ -54,12 +62,13 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         hotlineGroupLv.setAdapter(mCursorAdapter);
         hotlineGroupLv.setOnItemClickListener(this);
 
+        mRadioGroup.setOnCheckedChangeListener(this);
+
         if (doesDatabaseExist(this, Globals.DATABASE_NAME))
-            loadHotlinesData();
+            loadCursor();
         else {
-            //Crouton.makeText(GroupActivity.this, getString(R.string.loadingData_txt), Style.CONFIRM).show();
             if (parseAndSaveDataFromJson())
-                loadHotlinesData();
+                loadCursor();
             else {
                 statusTv.setText(getString(R.string.CouldNotLoadData_txt));
                 statusTv.setVisibility(View.VISIBLE);
@@ -69,13 +78,21 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
 
     }
 
-    private void loadHotlinesData() {
+    private void loadCursor() {
 
-        mCursorAdapter.setSearchText("");
-        String rawQuery = "SELECT g.group_id, g.group_name, GROUP_CONCAT(e.name , ', ') AS 'emirates' FROM ( groups g LEFT JOIN hotlines h ON h.group_id = g.group_id LEFT JOIN emirates e ON e.emirate_id = h.emirate_id) WHERE h.emirate_id IS NOT NULL GROUP BY g.group_id";
+        mCursorAdapter.setIsMarkedShown(showingMarked);
+        String rawQuery = "SELECT g.group_id, g.group_name, g.marked, GROUP_CONCAT(e.name , ', ') AS 'emirates' FROM ( groups g LEFT JOIN hotlines h ON h.group_id = g.group_id LEFT JOIN emirates e ON e.emirate_id = h.emirate_id) WHERE h.emirate_id IS NOT NULL";
+        if (showingMarked)
+            rawQuery += " AND g.marked=1";
+
+        if (!searchText.equals(""))
+            rawQuery += " AND g.group_name LIKE '%" + searchText + "%'";
+
+        rawQuery += " GROUP BY g.group_id";
         Query.many(GroupResult.class, rawQuery).getAsync(getLoaderManager(), OnGroupResultsLoaded);
 
     }
+
 
     private static boolean doesDatabaseExist(ContextWrapper context, String dbName) {
         File dbFile = context.getDatabasePath(dbName);
@@ -112,6 +129,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -133,7 +151,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
                             statusTv.setVisibility(View.VISIBLE);
                         } else
                             statusTv.setVisibility(View.GONE);
-                        return true;
+                        return false;
                     }
                     return false;
 
@@ -149,9 +167,8 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     public boolean onQueryTextChange(String searchText) {
 
         ((GroupResultCursorAdapter) hotlineGroupLv.getAdapter()).setSearchText(searchText);
-        String rawQuery = "SELECT g.group_id, g.group_name, GROUP_CONCAT(e.name , ', ') AS emirates FROM ( groups g LEFT JOIN hotlines h ON h.group_id = g.group_id LEFT JOIN emirates e ON e.emirate_id = h.emirate_id) WHERE g.group_name LIKE ? AND h.emirate_id IS NOT NULL GROUP BY g.group_id";
-        Query.many(GroupResult.class, rawQuery, "%" + searchText + "%").getAsync(getLoaderManager(), OnGroupResultsLoaded);
-
+        this.searchText = searchText;
+        loadCursor();
 
         return false;
     }
@@ -163,7 +180,7 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-        loadHotlinesData();
+
         return true;
     }
 
@@ -184,4 +201,36 @@ public class GroupActivity extends Activity implements SearchView.OnQueryTextLis
     }
 
 
+    @Override
+    public void groupWasMarked(GroupResult groupResult) {
+
+        Group group = Query.one(Group.class, "SELECT * FROM groups WHERE group_id=?", groupResult.groupId).get();
+        if (group != null) {
+            group.marked = !group.marked;
+            group.save();
+
+        }
+
+        loadCursor();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+        int checked = radioGroup.getCheckedRadioButtonId();
+        switch (checked) {
+            case R.id.allGroups:
+                showingMarked = false;
+
+                break;
+
+            case R.id.markedGroup:
+                showingMarked = true;
+                break;
+
+        }
+
+        loadCursor();
+
+    }
 }
