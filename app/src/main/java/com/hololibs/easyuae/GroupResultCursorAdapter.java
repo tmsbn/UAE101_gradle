@@ -88,12 +88,16 @@ public class GroupResultCursorAdapter extends BaseAdapter {
 
         final GroupResult groupResult = mGroups.get(position);
 
+        holder.markGroupIbtn.setFocusable(false);
+
         if (!isMarkedShown) {
             holder.markGroupIbtn.setVisibility(View.VISIBLE);
             if (groupResult.marked)
                 holder.markGroupIbtn.setActivated(true);
             else
                 holder.markGroupIbtn.setActivated(false);
+
+
 
 
             holder.markGroupIbtn.setOnClickListener(new View.OnClickListener() {
