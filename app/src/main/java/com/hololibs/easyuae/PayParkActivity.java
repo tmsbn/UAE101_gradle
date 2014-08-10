@@ -71,7 +71,7 @@ public class PayParkActivity extends Activity implements AdapterView.OnItemSelec
 
         provider = Globals.getCellProvider(getApplicationContext());
         if (provider == null) {
-            finish();
+          //  finish();
         }
 
         retrievePreviousValues();

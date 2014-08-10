@@ -5,11 +5,49 @@
     tools:context="com.hololibs.easyuae.GroupActivity">
 
 
+    <RadioGroup
+        android:id="@+id/groupsOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_card"
+        android:checkedButton="@+id/allGroups"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/allGroups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radio_left"
+            android:button="@null"
+            android:gravity="center"
+            android:minWidth="100dp"
+            android:padding="10dp"
+            android:text="ALL"
+            android:textColor="@drawable/segmented_textcolor"
+            android:textSize="17sp" />
+
+        <RadioButton
+            android:id="@+id/markedGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radio_right"
+            android:button="@null"
+            android:gravity="center"
+            android:minWidth="100dp"
+            android:padding="10dp"
+            android:text="MARKED"
+            android:textColor="@drawable/segmented_textcolor"
+            android:textSize="17sp" />
+    </RadioGroup>
+
+
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/groupsOptions"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:textSize="18sp"
@@ -17,8 +55,9 @@
 
     <ListView
         android:id="@+id/hotlineGroupList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/groupsOptions"
         android:listSelector="@drawable/default_selector" />
 
 </RelativeLayout>

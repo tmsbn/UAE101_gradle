@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/black70a"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             tools:hint="Some Group" />
 
@@ -37,5 +37,14 @@
             android:visibility="visible"
             tools:hint="All possible Emirates" />
     </LinearLayout>
+
+    <ImageButton
+        android:background="@android:color/transparent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_mark"
+        android:scaleType="centerInside"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
 </RelativeLayout>

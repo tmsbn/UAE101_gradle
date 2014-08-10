@@ -37,7 +37,7 @@
                     android:button="@null"
                     android:gravity="center"
                     android:minWidth="100dp"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:text="Dubai"
                     android:textColor="@drawable/segmented_textcolor"
                     android:textSize="17sp" />
@@ -50,7 +50,7 @@
                     android:button="@null"
                     android:gravity="center"
                     android:minWidth="100dp"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:text="Sharjah"
                     android:textColor="@drawable/segmented_textcolor"
                     android:textSize="17sp" />
