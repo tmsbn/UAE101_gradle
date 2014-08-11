@@ -18,12 +18,12 @@
     <string-array name="services_description">
         <item>Directory of hotlines numbers from UAE</item>
         <item>Tranfer Credit to another phone</item>
-        <item>Check the avaliable balance on your phone</item>
+        <item>Check the available balance on your phone</item>
         <item>Pay for Dubai mParking through SMS</item>
     </string-array>
 
     <!-- Parking -->
-    <string name="duration_txt">1 - 24</string>
+    <string name="duration_txt">1 – 24</string>
     <string name="plateNumber_txt">eg: A00000</string>
     <string name="zone_txt">eg:123A</string>
     <string name="mparking_txt">mParking</string>
@@ -75,7 +75,7 @@
     <string name="searchGroup_txt">Search Group</string>
     <string name="chooseGroup_txt">Choose a Group</string>
     <string name="title_activity_hotline_details">Details</string>
-    <string name="loading_txt">Loading...</string>
+    <string name="loading_txt">Loading…</string>
     <string name="noResults_txt">No Results</string>
     <string name="loadingData_txt">Loading data..</string>
     <string name="CouldNotLoadData_txt">Could not load hotlines data</string>
