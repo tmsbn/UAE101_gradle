@@ -49,6 +49,19 @@
         <item>L</item>
         <item>M</item>
         <item>N</item>
+        <item>O</item>
+        <item>P</item>
+        <item>Q</item>
+        <item>R</item>
+        <item>S</item>
+        <item>T</item>
+        <item>U</item>
+        <item>V</item>
+        <item>W</item>
+        <item>X</item>
+        <item>Y</item>
+        <item>Z</item>
+
     </string-array>
 
     <string name="test11">tms</string>
@@ -59,7 +72,6 @@
     <string name="sendTo_txt">Send To</string>
     <string name="prefix_hint">05X</string>
     <string name="sendCreditNumber_msg">05XXXXXXXX</string>
-    <string name="title_activity_hotlines">HotlinesActivity</string>
     <string name="searchGroup_txt">Search Group</string>
     <string name="chooseGroup_txt">Choose a Group</string>
     <string name="title_activity_hotline_details">Details</string>
